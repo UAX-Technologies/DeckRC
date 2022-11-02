@@ -17,9 +17,9 @@ v1
 
 ***Compatibility***
 
-Currently compatible with any aircraft that uses the Mavlink protocol and can be connected to wirelessly. Some aircraft like the SkyviperV2450 can be connected to directly for video and controls. Other aircraft may need a radio module or adapter to communicate wirelessly. 
+Currently compatible with any aircraft that uses the Mavlink protocol and can be connected to wirelessly. Some aircraft like the SkyviperV2450 can be connected to directly using built-in wifi for video and controls. Other aircraft may need a radio module or adapter to communicate wirelessly. 
 
 
 ***Radio Modules***
 
-The Steam Deck can supply 7.5W from the USB port. With that power budget in mind, a prototype module using a Doodle Labs NanoOEM module has been made and tested to over 1km (ran out of field). More details and radio module development is planned.
+The Steam Deck can supply 7.5W from the USB port. With that power budget in mind, a prototype module using a Doodle Labs NanoOEM radio has been made and tested to over 1km (ran out of field). More details and radio module development is planned.
