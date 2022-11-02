@@ -6,13 +6,18 @@ R/C controller made from a Steam Deck
 ***Version History***
 
 v1
+
 -Simple script to install dependancies required to run QGC with full video
+
 -Instrucitons to run QGC
+
 -Instructions to setup joystick using Steam or using sc-controller
+
 
 ***Compatibility***
 
 Currently compatible with any aircraft that uses the Mavlink protocol and can be connected to wirelessly. Some aircraft like the SkyviperV2450 can be connected to directly for video and controls. Other aircraft may need a radio module or adapter to communicate wirelessly. 
+
 
 ***Radio Modules***
 
