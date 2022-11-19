@@ -79,3 +79,11 @@ chmod +x QGroundControl.AppImage
 
 # Give 'deck' user permission to access serial I/O devices.
 usermod -a -G uucp deck
+
+# Force QGC to use the 'm5' voice. Move all others to ~deck/voices/
+VOICE='m5'
+VOICE_DUMP="${HOME}/voices"
+
+mkdir ${VOICE_DUMP}
+find '/usr/share/espeak-ng-data/voices/!v' -type f -not -name $VOICE \
+    -exec mv '{}' ${VOICE_DUMP} ';'
