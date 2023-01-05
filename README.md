@@ -26,5 +26,9 @@ Currently compatible with any aircraft that uses the Mavlink protocol and can be
 
 ***Radio Modules***
 
-The Steam Deck can supply 7.5W from the USB port. With that power budget in mind, a prototype module using a Doodle Labs NanoOEM radio has been made and tested to over 1km (ran out of field). More details and radio module development is planned.
+The Steam Deck can supply 7.5W from the USB port. With that power budget in mind, a prototype module using a Doodle Labs NanoOEM radio has been made and tested to over 1km (ran out of room at the field). More details and radio module development is planned.
 
+If you have a radio module you would like to see integrated, please submit an issue/feature request or send an email to the address below.
+
+***Commercial Options***
+For commercial support or customized version please contact UAX Technologies. info@uaxtech.com
