@@ -31,4 +31,5 @@ The Steam Deck can supply 7.5W from the USB port. With that power budget in mind
 If you have a radio module you would like to see integrated, please submit an issue/feature request or send an email to the address below.
 
 ***Commercial Options***
-For commercial support or customized version please contact UAX Technologies. info@uaxtech.com
+
+For commercial support or customized versions please contact UAX Technologies at info@uaxtech.com
