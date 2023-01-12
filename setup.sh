@@ -50,7 +50,9 @@ EOF
 
 # Dependencies for sc-controller
 pacman -S --disable-download-timeout --overwrite '*' \
-    python-gobject python-pylibacl python-evdev
+    python-gobject python-pylibacl python-evdev <<EOF
+Y
+EOF
 
 # Install sc-controller-git from AUR.
 # TODO: Use the stable release instead of the -git version. The -git version is
