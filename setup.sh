@@ -63,7 +63,7 @@ mkdir ~/aur
 cd ~/aur
 git clone https://aur.archlinux.org/sc-controller-git.git
 cd sc-controller-git
-makepkg -i
+sudo -u deck makepkg -i
 
 # Auto-start sc-controller
 cp /usr/share/applications/sc-controller.desktop ~/.config/autostart/
