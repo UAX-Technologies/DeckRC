@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #
-# The --deckrc flag causes the Steam client to be disabled and the default
+# The --deckrc-only flag causes the Steam client to be disabled and the default
 # session to be set to KDE.
 #
 
 # Allow read/write access to root filesystem
 steamos-readonly disable
 
-if [ "$1" = "--deckrc" ]
+if [ "$1" = "--deckrc-only" ]
 then
     # Set desktop session to Plasma/X11.
     # TODO: Why does QGC fail to launch under Wayland?
