@@ -76,8 +76,18 @@ sudo -u deck makepkg -i
 # Auto-start sc-controller
 cp /usr/share/applications/sc-controller.desktop ~/.config/autostart/
 
-# TODO: Drop configuration file for sc-controller to ~/.config/scc/config.json
-# and profile to ~/.config/scc/profiles/
+mkdir ~/.config/scc
+tee >~/.config/scc/config.json <<EOF
+{
+    "gui": {
+        "enable_status_icon": true,
+        "minimize_on_start": true,
+        "minimize_to_status_icon": true
+    }
+}
+EOF
+
+# TODO: Add sc-controller profile to ~/.config/scc/profiles/
 
 # Dependencies for QGC
 pacman -S --disable-download-timeout --overwrite '*' \
