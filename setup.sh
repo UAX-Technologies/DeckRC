@@ -5,7 +5,7 @@ steamos-readonly disable
 
 # Set desktop session to Plasma/X11.
 # TODO: Why does QGC fail to launch under Wayland?
-steamos-session-select plasma-persistent
+steamos-session-select plasma-x11-persistent
 
 # Disable steam client
 # TODO: Use a more elegant solution.
