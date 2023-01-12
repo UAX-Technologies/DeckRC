@@ -91,3 +91,6 @@ VOICE_DUMP="${HOME}/voices"
 mkdir ${VOICE_DUMP}
 find '/usr/share/espeak-ng-data/voices/!v' -type f -not -name $VOICE \
     -exec mv '{}' ${VOICE_DUMP} ';'
+
+# Reboot into the newly setup DeckRC
+reboot
