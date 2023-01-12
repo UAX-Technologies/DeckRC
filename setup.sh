@@ -13,7 +13,9 @@ chmod -x /usr/bin/steam
 
 pacman-key --init
 pacman-key --populate archlinux
-pacman -Syu --disable-download-timeout --overwrite '*'
+pacman -Syu --disable-download-timeout --overwrite '*' <<EOF
+Y
+EOF
 
 # Split the following package installations into separate pacman commands to
 # avoid an "insufficient disk space" error.
