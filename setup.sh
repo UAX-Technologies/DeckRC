@@ -50,7 +50,8 @@ EOF
 
 # Dependencies for sc-controller
 pacman -S --disable-download-timeout --overwrite '*' \
-    python-gobject python-pylibacl python-evdev <<EOF
+    python-gobject python-pylibacl python-evdev \
+    python-cairo xorg-xinput python-setuptools <<EOF
 Y
 EOF
 
@@ -74,7 +75,9 @@ cp /usr/share/applications/sc-controller.desktop ~/.config/autostart/
 pacman -S --disable-download-timeout --overwrite '*' \
     qt5-speech qt5-multimedia qt5-serialport qt5-charts qt5-quickcontrols \
     qt5-quickcontrols2 qt5-location qt5-svg qt5-graphicaleffects qt5-x11extras \
-    patchelf xdg-desktop-portal-kde
+    patchelf xdg-desktop-portal-kde <<EOF
+Y
+EOF
 
 # Fetch QGC AppImage
 cd ~/Desktop/
