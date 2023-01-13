@@ -86,7 +86,7 @@ ${INSTALL} gstreamermm
 
 mkdir ~/aur
 cd ~/aur
-git clone https://aur.archlinux.org/sc-controller-git.git
+git clone --depth 1 https://aur.archlinux.org/sc-controller-git.git
 cd sc-controller-git
 sudo -u deck makepkg -i
 
