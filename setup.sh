@@ -114,4 +114,9 @@ find '/usr/share/espeak-ng-data/voices/!v' -type f -name $VOICE \
     -exec mv '{}' ${VOICE_DUMP} ';'
 
 # Reboot into the newly setup DeckRC
-reboot
+read -p "Reboot the system? (y/n; default=y): " reboot
+
+if [[ ${#reboot} == 0 || ${reboot:0:1} == "Y" || ${reboot:0:1} == "y" ]]
+then
+    reboot
+fi
