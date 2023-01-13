@@ -21,47 +21,64 @@ fi
 
 pacman-key --init
 pacman-key --populate archlinux
-pacman -Syu --disable-download-timeout --overwrite '*' <<EOF
-Y
-EOF
 
-# Split the following package installations into separate pacman commands to
-# avoid an "insufficient disk space" error.
+INSTALL="pacman -S --disable-download-timeout --overwrite '*' --noconfirm"
 
-pacman -S --disable-download-timeout --overwrite '*' \
-    tmux git mono mono-addins mono-tools mono-msbuild cmake base-devel glibc \
-    <<EOF
+# Update the system
+${INSTALL} -yu
 
-Y
-EOF
-
-pacman -S --disable-download-timeout --overwrite '*' \
-    linux-api-headers qt5-tools qt5-wayland qt5-base python zlib <<EOF
-Y
-EOF
-
-pacman -S --disable-download-timeout --overwrite '*' \
-    lib32-gst-plugins-good lib32-gst-plugins-base lib32-gstreamer \
-    lib32-gst-plugins-base-libs qt-gstreamer gstreamer-vaapi gstreamermm <<EOF
-2
-1
-1
-1
-1
-Y
-EOF
-
-pacman -S --disable-download-timeout --overwrite '*' \
-    ninja python-pip docker espeak-ng speech-dispatcher <<EOF
-Y
-EOF
+# Install required packages
+${INSTALL} tmux
+${INSTALL} git
+${INSTALL} mono
+${INSTALL} mono-addins
+${INSTALL} mono-tools
+${INSTALL} mono-msbuild
+${INSTALL} cmake
+${INSTALL} base-devel
+${INSTALL} glibc
+${INSTALL} linux-api-headers
+${INSTALL} qt5-tools
+${INSTALL} qt5-wayland
+${INSTALL} qt5-base
+${INSTALL} python
+${INSTALL} zlib
+${INSTALL} ninja
+${INSTALL} python-pip
+${INSTALL} docker
 
 # Dependencies for sc-controller
-pacman -S --disable-download-timeout --overwrite '*' \
-    python-gobject python-pylibacl python-evdev \
-    python-cairo xorg-xinput python-setuptools <<EOF
-Y
-EOF
+${INSTALL} python-gobject
+${INSTALL} python-pylibacl
+${INSTALL} python-evdev
+${INSTALL} python-cairo
+${INSTALL} xorg-xinput
+${INSTALL} python-setuptools
+
+# Dependencies for QGC
+${INSTALL} qt5-speech
+${INSTALL} qt5-multimedia
+${INSTALL} qt5-serialport
+${INSTALL} qt5-charts
+${INSTALL} qt5-quickcontrols
+${INSTALL} qt5-quickcontrols2
+${INSTALL} qt5-location
+${INSTALL} qt5-svg
+${INSTALL} qt5-graphicaleffects
+${INSTALL} qt5-x11extras
+${INSTALL} patchelf
+${INSTALL} xdg-desktop-portal-kde
+${INSTALL} espeak-ng
+${INSTALL} speech-dispatcher
+
+${INSTALL} lib32-pipewire-jack
+${INSTALL} lib32-gst-plugins-good
+${INSTALL} lib32-gst-plugins-base
+${INSTALL} lib32-gstreamer
+${INSTALL} lib32-gst-plugins-base-libs
+${INSTALL} qt-gstreamer
+${INSTALL} gstreamer-vaapi
+${INSTALL} gstreamermm
 
 # Install sc-controller-git from AUR.
 # TODO: Use the stable release instead of the -git version. The -git version is
@@ -76,6 +93,7 @@ sudo -u deck makepkg -i
 # Auto-start sc-controller
 cp /usr/share/applications/sc-controller.desktop ~/.config/autostart/
 
+# Setup configuration file for sc-controller
 mkdir ~/.config/scc
 tee >~/.config/scc/config.json <<EOF
 {
@@ -89,14 +107,6 @@ EOF
 
 # TODO: Add sc-controller profile to ~/.config/scc/profiles/
 
-# Dependencies for QGC
-pacman -S --disable-download-timeout --overwrite '*' \
-    qt5-speech qt5-multimedia qt5-serialport qt5-charts qt5-quickcontrols \
-    qt5-quickcontrols2 qt5-location qt5-svg qt5-graphicaleffects qt5-x11extras \
-    patchelf xdg-desktop-portal-kde <<EOF
-Y
-EOF
-
 # Fetch QGC AppImage
 cd ~/Desktop/
 wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
@@ -105,17 +115,19 @@ chmod +x QGroundControl.AppImage
 # Give 'deck' user permission to access serial I/O devices.
 usermod -a -G uucp deck
 
-# Move the Grandma voice to prevent QGC from using it as default
-VOICE='grandma'
-VOICE_DUMP='/usr/share/espeak-ng-data/voices/!v/voices'
+# Move the Grandma and Grandpa voices to prevent QGC from using them as default
+VOICES_DISABLED='grandma grandpa'
+VOICE_DIR='/usr/share/espeak-ng-data/voices/!v'
+VOICE_DUMP='${VOICE_DIR}/.disabled'
 
 mkdir ${VOICE_DUMP}
-find '/usr/share/espeak-ng-data/voices/!v' -type f -name $VOICE \
-    -exec mv '{}' ${VOICE_DUMP} ';'
+for v in ${VOICES_DISABLED}
+do
+    mv ${VOICE_DIR}/${v} ${VOICE_DUMP}
+done
 
 # Reboot into the newly setup DeckRC
 read -p "Reboot the system? (y/n; default=y): " reboot
-
 if [[ ${#reboot} == 0 || ${reboot:0:1} == "Y" || ${reboot:0:1} == "y" ]]
 then
     reboot
