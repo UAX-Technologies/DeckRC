@@ -32,4 +32,4 @@ If you have a radio module you would like to see integrated, please submit an is
 
 ***Commercial Options***
 
-For commercial support or customized versions please contact UAX Technologies at info@uaxtech.com
+For commercial support or customized versions (hardware and software) please contact UAX Technologies at info@uaxtech.com
