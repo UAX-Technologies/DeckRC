@@ -4,7 +4,7 @@ R/C controller made from a Steam Deck
 
 [Video Overview of Early Prototype](https://drive.google.com/file/d/1Rv49gheABxV57nCmLaEn5Xd9LftmO3pv/view?t=6s)
 
-[Flight Demo with Early Prototype](https://drive.google.com/file/d/1RpIoTuyx1Tp80STPtxc_YhQdGojEeoAZ/view?t=30s)
+[Flight Demo with Early Prototype](https://youtu.be/_oFQyhxMKOQ)
 
 ***Repo Under Construction***
 
