@@ -8,6 +8,16 @@ R/C controller made from a Steam Deck
 
 ***Repo Under Construction***
 
+
+***Project Overview***
+
+The project has a few goals:
+1. Open source software to enable anyone to control a vehicle with the Steam Deck (using a wire, WiFi, or other self-developed means).
+2. Build instructinos for DIY radio options to allow anyone to build their own fully functional long-range digital drone (Ubiquiti gear, ESP chips, Combine with [Drone Bridge](https://github.com/DroneBridge/DroneBridge)).
+3. Support for existing High-power commercial radios (Doodle Labs, Silvus, Persistent Systems, Microhard).
+4. Support for commerciall developed version of the product for industrial drone customers.
+
+
 ***Version History***
 
 v1
@@ -30,6 +40,7 @@ The Steam Deck can supply 7.5W from the USB port. With that power budget in mind
 
 If you have a radio module you would like to see integrated, please submit an issue/feature request or send an email to the address below.
 
+
 ***Commercial Options***
 
-For commercial support or customized versions (hardware and software) please contact: info@uaxtech.com
+For commercial support or customized versions (hardware and software) please contact [UAX Technologies](https://uaxtech.com/)
