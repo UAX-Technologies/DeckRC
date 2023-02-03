@@ -15,7 +15,7 @@ The project has a few goals:
 1. Open source software to enable anyone to control a vehicle with the Steam Deck (using a wire, WiFi, or other self-developed means).
 2. Build instructinos for DIY radio options to allow anyone to build their own fully functional long-range digital drone (Ubiquiti gear, ESP chips, Combine with [Drone Bridge](https://github.com/DroneBridge/DroneBridge)).
 3. Support for existing High-power commercial radios (Doodle Labs, Silvus, Persistent Systems, Microhard).
-4. Support for commerciall developed version of the product for industrial drone customers.
+4. Support for commercially developed versions of the product for industrial drone customers (and maybe a low cost version for consumers if the right radio can be found).
 
 
 ***Version History***
