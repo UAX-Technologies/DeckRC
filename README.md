@@ -9,7 +9,7 @@ R/C controller made from a Steam Deck
 ***Repo Under Construction***
 
 
-***Project Overview***
+***Project Goals***
 
 1. Open source software to enable anyone to control a vehicle with the Steam Deck (using WiFi, Bluetooth, a wire, or other self-developed means).
 2. Build instructinos for DIY radio options to allow anyone to build their own fully functional long-range digital drone (Ubiquiti gear, ESP chips, [Drone Bridge](https://github.com/DroneBridge/DroneBridge), RFD + 5.8 GHz vRX).
