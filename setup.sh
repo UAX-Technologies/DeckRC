@@ -5,20 +5,39 @@
 # session to be set to KDE.
 #
 
+
+# Check if a password is set. If there is none prompot the user for a new password
+PASSWORD_STATUS=$(passwd --status $USER | awk '{print $2}')
+
+# Check if the status is "NP", indicating no password
+if [ "$PASSWORD_STATUS" == "NP" ]; then
+    echo "No password set for user $USER. You need to set a password."
+    # Run the passwd command to prompt for a new password
+    passwd $USER
+else
+    echo "User password is already set. Continuing setup process."
+fi
+
+
+
 # Allow read/write access to root filesystem
-steamos-readonly disable
+echo "Enabling write access to system partitions."
+sudo steamos-readonly disable
 
 if [ "$1" = "--deckrc-only" ]
 then
     # Set desktop session to Plasma/X11.
     # TODO: Why does QGC fail to launch under Wayland?
+    echo "Forcing X11 for QGC compatibility"
     steamos-session-select plasma-x11-persistent
 
     # Disable steam client
     # TODO: Use a more elegant solution.
+    echo "Disabling Steam client"
     chmod -x /usr/bin/steam
 fi
 
+echo "Starting pacman setup..."
 pacman-key --init
 pacman-key --populate archlinux
 
@@ -84,6 +103,7 @@ ${INSTALL} gstreamermm
 # TODO: Use the stable release instead of the -git version. The -git version is
 # needed for now because the latest release does not yet support the Deck.
 
+echo "Starting sc-controller setup"
 mkdir ~/aur
 cd ~/aur
 git clone --depth 1 https://aur.archlinux.org/sc-controller-git.git
@@ -108,6 +128,7 @@ EOF
 # TODO: Add sc-controller profile to ~/.config/scc/profiles/
 
 # Fetch QGC AppImage
+echo "Setting up QGC..."
 cd ~/Desktop/
 wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
 chmod +x QGroundControl.AppImage
@@ -116,6 +137,7 @@ chmod +x QGroundControl.AppImage
 usermod -a -G uucp deck
 
 # Move the Grandma and Grandpa voices to prevent QGC from using them as default
+echo "Fixing QGC voices..."
 VOICES_DISABLED='grandma grandpa'
 VOICE_DIR='/usr/share/espeak-ng-data/voices/!v'
 VOICE_DUMP='${VOICE_DIR}/.disabled'
@@ -127,6 +149,7 @@ do
 done
 
 # Reboot into the newly setup DeckRC
+echo "Finished Script"
 read -p "Reboot the system? (y/n; default=y): " reboot
 if [[ ${#reboot} == 0 || ${reboot:0:1} == "Y" || ${reboot:0:1} == "y" ]]
 then
