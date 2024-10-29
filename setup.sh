@@ -142,12 +142,12 @@ usermod -a -G uucp deck
 echo "Fixing QGC voices..."
 VOICES_DISABLED='grandma grandpa'
 VOICE_DIR='/usr/share/espeak-ng-data/voices/!v'
-VOICE_DUMP='${VOICE_DIR}/.disabled'
+VOICE_DUMP="${VOICE_DIR}/.disabled"
 
-mkdir ${VOICE_DUMP}
+mkdir -p "${VOICE_DUMP}"
 for v in ${VOICES_DISABLED}
 do
-    mv ${VOICE_DIR}/${v} ${VOICE_DUMP}
+    mv "${VOICE_DIR}/${v}" "${VOICE_DUMP}"
 done
 
 # Reboot into the newly setup DeckRC
