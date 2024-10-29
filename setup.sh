@@ -40,6 +40,8 @@ fi
 echo "Starting pacman setup..."
 pacman-key --init
 pacman-key --populate archlinux
+#adding this key to fix issues with pgp signatures on steamdeck. Might be able to remove the previous link for --populate archlinux
+pacman-key --populate holo
 
 INSTALL="pacman -S --disable-download-timeout --overwrite '*' --noconfirm"
 
