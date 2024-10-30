@@ -24,23 +24,6 @@ fi
 echo "Enabling write access to system partitions."
 sudo steamos-readonly disable
 
-read -p "Preserve Steam and Gaming (y/n; default=y): " gamingask
-if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]]; then
-    echo "Steam and gaming settings will be unchanged or re-enabled"
-        sudo chmod +x /usr/bin/steam-jupiter
-else
-    # Set desktop session to Plasma/X11.
-    # TODO: Why does QGC fail to launch under Wayland?
-        echo "Forcing X11 for QGC compatibility"
-        steamos-session-select plasma-x11-persistent
-
-    # Disable steam client
-    # TODO: Use a more elegant solution.
-    # commenting out because this was causing a hung boot
-    # echo "Disabling Steam client"
-    # sudo chmod -x /usr/bin/steam
-fi
-
 echo "Starting pacman setup..."
 sudo pacman-key --init
 sudo pacman-key --populate archlinux
@@ -153,6 +136,23 @@ for v in ${VOICES_DISABLED}
 do
     sudo mv "${VOICE_DIR}/${v}" "${VOICE_DUMP}"
 done
+
+read -p "Preserve Steam and Gaming (y/n; default=y): " gamingask
+if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]]; then
+    echo "Steam and gaming settings will be unchanged or re-enabled"
+        sudo chmod +x /usr/bin/steam-jupiter
+else
+    # Set desktop session to Plasma/X11.
+    # TODO: Why does QGC fail to launch under Wayland?
+        echo "Forcing X11 for QGC compatibility"
+        steamos-session-select plasma-x11-persistent
+
+    # Disable steam client
+    # TODO: Use a more elegant solution.
+    # commenting out because this was causing a hung boot
+    # echo "Disabling Steam client"
+    # sudo chmod -x /usr/bin/steam
+fi
 
 # Reboot into the newly setup DeckRC
 echo "Finished Script"
