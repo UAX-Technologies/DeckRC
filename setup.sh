@@ -115,6 +115,8 @@ cd ~/Desktop/
 wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
 chmod +x QGroundControl.AppImage
 
+
+
 # Give 'deck' user permission to access serial I/O devices.
 sudo usermod -a -G uucp deck
 
@@ -129,6 +131,13 @@ for v in ${VOICES_DISABLED}
 do
     sudo mv "${VOICE_DIR}/${v}" "${VOICE_DUMP}"
 done
+
+read -p "Enable routing for Herelink network (y/n; default=y): " herelinkask
+if [[ ${#herelinkask} == 0 || ${herelinkask:0:1} == "Y" || ${herelinkask:0:1} == "y" ]]; then
+#Set Herleink IP routes
+#TODO: make this persistent. Right now it doesn't survive reboots
+sudo ip route add 192.168.144.0/24 via 192.168.43.1
+fi
 
 read -p "Preserve Steam and Gaming (y/n; default=y): " gamingask
 if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]]; then
