@@ -26,7 +26,8 @@ sudo steamos-readonly disable
 
 read -p "Preserve Steam and Gaming (y/n; default=y): " gamingask
 if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]]; then
-    echo "Steam and gaming esttings will be unchanged"
+    echo "Steam and gaming settings will be unchanged or re-enabled"
+        sudo chmod +x /usr/bin/steam
 else
     # Set desktop session to Plasma/X11.
     # TODO: Why does QGC fail to launch under Wayland?
