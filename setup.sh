@@ -55,15 +55,6 @@ ${INSTALL} ninja
 ${INSTALL} python-pip
 ${INSTALL} docker
 
-# Dependencies for sc-controller
-#${INSTALL} python-gobject
-#${INSTALL} python-pylibacl
-#${INSTALL} python-evdev
-#${INSTALL} python-cairo
-#${INSTALL} xorg-xinput
-#${INSTALL} python-setuptools
-#${INSTALL} python-poetry
-
 # Dependencies for QGC
 ${INSTALL} qt5-speech
 ${INSTALL} qt5-multimedia
@@ -98,15 +89,8 @@ git checkout 96f90180a3cf72673b1769c23e2c74edb0293a9f
 makepkg -si --noconfirm
 
 # Install sc-controller-git from AUR.
-# TODO: Use the stable release instead of the -git version. The -git version is
-# needed for now because the latest release does not yet support the Deck.
-
 echo "Starting sc-controller setup"
-mkdir ~/aur
-cd ~/aur
-git clone --depth 1 https://aur.archlinux.org/sc-controller-git.git
-cd sc-controller-git
-sudo -u deck makepkg -i
+yay -S sc-controller
 
 # Auto-start sc-controller
 cp /usr/share/applications/sc-controller.desktop ~/.config/autostart/
