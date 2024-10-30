@@ -37,16 +37,16 @@ else
     # Disable steam client
     # TODO: Use a more elegant solution.
     echo "Disabling Steam client"
-    chmod -x /usr/bin/steam
+    sudo chmod -x /usr/bin/steam
 fi
 
 echo "Starting pacman setup..."
-pacman-key --init
-pacman-key --populate archlinux
+sudo pacman-key --init
+sudo pacman-key --populate archlinux
 #adding this key to fix issues with pgp signatures on steamdeck. Might be able to remove the previous link for --populate archlinux
-pacman-key --populate holo
+sudo pacman-key --populate holo
 
-INSTALL="pacman -S --disable-download-timeout --overwrite '*' --noconfirm"
+INSTALL="sudo pacman -S --disable-download-timeout --overwrite '*' --noconfirm"
 
 # Update the system
 ${INSTALL} -yu
@@ -139,7 +139,7 @@ wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
 chmod +x QGroundControl.AppImage
 
 # Give 'deck' user permission to access serial I/O devices.
-usermod -a -G uucp deck
+sudo usermod -a -G uucp deck
 
 # Move the Grandma and Grandpa voices to prevent QGC from using them as default
 echo "Fixing QGC voices..."
@@ -147,10 +147,10 @@ VOICES_DISABLED='grandma grandpa'
 VOICE_DIR='/usr/share/espeak-ng-data/voices/!v'
 VOICE_DUMP="${VOICE_DIR}/.disabled"
 
-mkdir -p "${VOICE_DUMP}"
+sudo mkdir "${VOICE_DUMP}"
 for v in ${VOICES_DISABLED}
 do
-    mv "${VOICE_DIR}/${v}" "${VOICE_DUMP}"
+    sudo mv "${VOICE_DIR}/${v}" "${VOICE_DUMP}"
 done
 
 # Reboot into the newly setup DeckRC
