@@ -56,12 +56,13 @@ ${INSTALL} python-pip
 ${INSTALL} docker
 
 # Dependencies for sc-controller
-${INSTALL} python-gobject
-${INSTALL} python-pylibacl
-${INSTALL} python-evdev
-${INSTALL} python-cairo
-${INSTALL} xorg-xinput
-${INSTALL} python-setuptools
+#${INSTALL} python-gobject
+#${INSTALL} python-pylibacl
+#${INSTALL} python-evdev
+#${INSTALL} python-cairo
+#${INSTALL} xorg-xinput
+#${INSTALL} python-setuptools
+#${INSTALL} python-poetry
 
 # Dependencies for QGC
 ${INSTALL} qt5-speech
@@ -87,6 +88,14 @@ ${INSTALL} lib32-gst-plugins-base-libs
 ${INSTALL} qt-gstreamer
 ${INSTALL} gstreamer-vaapi
 ${INSTALL} gstreamermm
+
+#Setup yay
+mkdir ~/aur
+cd ~/aur
+git clone https://aur.archlinux.org/yay-bin.git
+cd yay-bin/
+git checkout 96f90180a3cf72673b1769c23e2c74edb0293a9f
+makepkg -si --noconfirm
 
 # Install sc-controller-git from AUR.
 # TODO: Use the stable release instead of the -git version. The -git version is
