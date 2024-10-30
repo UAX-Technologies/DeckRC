@@ -24,8 +24,10 @@ fi
 echo "Enabling write access to system partitions."
 sudo steamos-readonly disable
 
-if [ "$1" = "--deckrc-only" ]
-then
+read -p "Preserve Steam and Gaming (y/n; default=y): " gamingask
+if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]]; then
+    echo "Steam and gaming esttings will be unchanged"
+else
     # Set desktop session to Plasma/X11.
     # TODO: Why does QGC fail to launch under Wayland?
     echo "Forcing X11 for QGC compatibility"
