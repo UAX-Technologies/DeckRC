@@ -30,8 +30,9 @@ if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]
 else
     # Set desktop session to Plasma/X11.
     # TODO: Why does QGC fail to launch under Wayland?
-    echo "Forcing X11 for QGC compatibility"
-    steamos-session-select plasma-x11-persistent
+    #temporarily disbaling to fix boot issue
+        #echo "Forcing X11 for QGC compatibility"
+        #steamos-session-select plasma-x11-persistent
 
     # Disable steam client
     # TODO: Use a more elegant solution.
