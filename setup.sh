@@ -91,7 +91,10 @@ makepkg -si --noconfirm
 
 # Install sc-controller-git from AUR.
 echo "Starting sc-controller setup"
-yay -S sc-controller
+#yay -S sc-controller
+cd ~/Desktop/
+wget https://github.com/kozec/sc-controller/releases/download/v0.4.10-pre/sc-controller-0.4.8+5b42308-x86_64.AppImage
+chmod +x sc-controller-0.4.8+5b42308-x86_64.AppImage
 
 # Auto-start sc-controller
 cp /usr/share/applications/sc-controller.desktop ~/.config/autostart/
