@@ -85,6 +85,7 @@ mkdir ~/aur
 cd ~/aur
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin/
+#Check out this specific version that is compatible with SteamOS
 git checkout 96f90180a3cf72673b1769c23e2c74edb0293a9f
 makepkg -si --noconfirm
 
@@ -112,7 +113,9 @@ EOF
 # Fetch QGC AppImage
 echo "Setting up QGC..."
 cd ~/Desktop/
-wget https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl.AppImage
+# Using pre-release versino of QGC (13031c3) to fix video color issues (https://github.com/mavlink/qgroundcontrol/commit/13031c3f6ca5a58ef3d47cb3b9891c429f696387)
+# TODO: replace with stable version once fixes have been merged
+wget https://drive.google.com/file/d/1AEagPhVpcIz1n8NHh0L8h5q8L-A3PfzD/view?usp=drive_link
 chmod +x QGroundControl.AppImage
 
 
