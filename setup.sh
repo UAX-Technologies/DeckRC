@@ -91,7 +91,7 @@ makepkg -si --noconfirm
 
 # Install sc-controller-git from AUR.
 echo "Starting sc-controller setup"
-#yay -S sc-controller
+#yay -S sc-controller-git
 cd ~/Desktop/
 wget https://github.com/kozec/sc-controller/releases/download/v0.4.10-pre/sc-controller-0.4.8+5b42308-x86_64.AppImage
 chmod +x sc-controller-0.4.8+5b42308-x86_64.AppImage
@@ -141,7 +141,7 @@ done
 read -p "Enable routing for Herelink network (y/n; default=y): " herelinkask
 if [[ ${#herelinkask} == 0 || ${herelinkask:0:1} == "Y" || ${herelinkask:0:1} == "y" ]]; then
 #Set Herleink IP routes
-#TODO: make this persistent. Right now it doesn't survive reboots
+#TODO: make this persistent. Right now it doesn't survive reboots. Right now a user can make it persistent easily by setting it up in the routes section of the ipv4 menu.
 sudo ip route add 192.168.144.0/24 via 192.168.43.1
 fi
 
