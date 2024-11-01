@@ -116,10 +116,10 @@ EOF
 # Fetch QGC AppImage
 echo "Setting up QGC..."
 cd ~/Desktop/
-# Using pre-release versino of QGC (13031c3) to fix video color issues (https://github.com/mavlink/qgroundcontrol/commit/13031c3f6ca5a58ef3d47cb3b9891c429f696387)
+# Using master build version of QGC (13031c3) to fix video color issues. The commit here was tested and working well: (https://github.com/mavlink/qgroundcontrol/commit/13031c3f6ca5a58ef3d47cb3b9891c429f696387)
 # TODO: replace with stable version once fixes have been merged
-wget https://drive.google.com/file/d/1AEagPhVpcIz1n8NHh0L8h5q8L-A3PfzD/view?usp=drive_link
-chmod +x QGroundControl.AppImage
+wget https://github.com/mavlink/qgroundcontrol/releases/download/latest/QGroundControl-x86_64.AppImage
+chmod +x QGroundControl-x86_64.AppImage
 
 
 
@@ -145,7 +145,7 @@ if [[ ${#herelinkask} == 0 || ${herelinkask:0:1} == "Y" || ${herelinkask:0:1} ==
 sudo ip route add 192.168.144.0/24 via 192.168.43.1
 fi
 
-read -p "Preserve Steam and Gaming (y/n; default=y): " gamingask
+read -p "Preserve Steam gaming mode boot priority (y/n; default=y): " gamingask
 if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]]; then
     echo "Steam and gaming settings will be unchanged or re-enabled"
         sudo chmod +x /usr/bin/steam-jupiter
