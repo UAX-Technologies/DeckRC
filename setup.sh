@@ -36,7 +36,7 @@ INSTALL="sudo pacman -S --disable-download-timeout --overwrite '*' --noconfirm"
 ${INSTALL} -yu
 
 # Install required packages
-${INSTALL} tmux
+#${INSTALL} tmux
 ${INSTALL} git
 ${INSTALL} mono
 ${INSTALL} mono-addins
@@ -46,9 +46,6 @@ ${INSTALL} cmake
 ${INSTALL} base-devel
 ${INSTALL} glibc
 ${INSTALL} linux-api-headers
-${INSTALL} qt5-tools
-${INSTALL} qt5-wayland
-${INSTALL} qt5-base
 ${INSTALL} python
 ${INSTALL} zlib
 ${INSTALL} ninja
@@ -56,6 +53,10 @@ ${INSTALL} python-pip
 ${INSTALL} docker
 
 # Dependencies for QGC
+:'
+${INSTALL} qt5-tools
+${INSTALL} qt5-wayland
+${INSTALL} qt5-base
 ${INSTALL} qt5-speech
 ${INSTALL} qt5-multimedia
 ${INSTALL} qt5-serialport
@@ -66,11 +67,14 @@ ${INSTALL} qt5-location
 ${INSTALL} qt5-svg
 ${INSTALL} qt5-graphicaleffects
 ${INSTALL} qt5-x11extras
+'
 ${INSTALL} patchelf
 ${INSTALL} xdg-desktop-portal-kde
 ${INSTALL} espeak-ng
 ${INSTALL} speech-dispatcher
 
+#Gstreamer
+;'
 ${INSTALL} lib32-pipewire-jack
 ${INSTALL} lib32-gst-plugins-good
 ${INSTALL} lib32-gst-plugins-base
@@ -79,7 +83,14 @@ ${INSTALL} lib32-gst-plugins-base-libs
 ${INSTALL} qt-gstreamer
 ${INSTALL} gstreamer-vaapi
 ${INSTALL} gstreamermm
+'
+${INSTALL} gstreamer
+${INSTALL} gst-plugins-base
+${INSTALL} gst-plugins-good
+${INSTALL} gst-plugins-bad
+${INSTALL} gst-plugins-ugly
 
+;'
 #Setup yay
 mkdir ~/aur
 cd ~/aur
@@ -112,6 +123,7 @@ tee >~/.config/scc/config.json <<EOF
 EOF
 
 # TODO: Add sc-controller profile to ~/.config/scc/profiles/
+'
 
 # Fetch QGC AppImage
 echo "Setting up QGC..."
@@ -138,12 +150,14 @@ do
     sudo mv "${VOICE_DIR}/${v}" "${VOICE_DUMP}"
 done
 
+
 read -p "Enable routing for Herelink network (y/n; default=y): " herelinkask
 if [[ ${#herelinkask} == 0 || ${herelinkask:0:1} == "Y" || ${herelinkask:0:1} == "y" ]]; then
 #Set Herleink IP routes
 #TODO: make this persistent. Right now it doesn't survive reboots. Right now a user can make it persistent easily by setting it up in the routes section of the ipv4 menu.
 sudo ip route add 192.168.144.0/24 via 192.168.43.1
 fi
+
 
 read -p "Preserve Steam gaming mode boot priority (y/n; default=y): " gamingask
 if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]]; then
