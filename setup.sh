@@ -26,7 +26,7 @@ sudo steamos-readonly disable
 
 echo "Starting pacman setup..."
 sudo pacman-key --init
-sudo pacman-key --populate archlinux
+#sudo pacman-key --populate archlinux
 #adding this key to fix issues with pgp signatures on steamdeck. Might be able to remove the previous link for --populate archlinux
 sudo pacman-key --populate holo
 
