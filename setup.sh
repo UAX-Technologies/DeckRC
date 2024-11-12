@@ -74,7 +74,7 @@ ${INSTALL} espeak-ng
 ${INSTALL} speech-dispatcher
 
 #Gstreamer
-;'
+:'
 ${INSTALL} lib32-pipewire-jack
 ${INSTALL} lib32-gst-plugins-good
 ${INSTALL} lib32-gst-plugins-base
@@ -90,7 +90,7 @@ ${INSTALL} gst-plugins-good
 ${INSTALL} gst-plugins-bad
 ${INSTALL} gst-plugins-ugly
 
-;'
+:'
 #Setup yay
 mkdir ~/aur
 cd ~/aur
