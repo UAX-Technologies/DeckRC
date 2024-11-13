@@ -89,6 +89,8 @@ ${INSTALL} gst-plugins-base
 ${INSTALL} gst-plugins-good
 ${INSTALL} gst-plugins-bad
 ${INSTALL} gst-plugins-ugly
+${INSTALL} gst-libav
+
 
 :'
 #Setup yay
