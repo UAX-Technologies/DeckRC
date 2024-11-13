@@ -132,8 +132,8 @@ echo "Setting up QGC..."
 cd ~/Desktop/
 # Using master build version of QGC (13031c3) to fix video color issues. The commit here was tested and working well: (https://github.com/mavlink/qgroundcontrol/commit/13031c3f6ca5a58ef3d47cb3b9891c429f696387)
 # TODO: replace with stable version once fixes have been merged
-wget https://github.com/mavlink/qgroundcontrol/releases/download/latest/QGroundControl-x86_64.AppImage
-chmod +x QGroundControl-x86_64.AppImage
+wget https://github.com/mavlink/qgroundcontrol/releases/download/v4.4.2/QGroundControl.AppImage
+chmod +x QGroundControl.AppImage
 
 
 
