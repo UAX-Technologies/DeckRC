@@ -26,7 +26,7 @@ sudo steamos-readonly disable
 
 echo "Starting pacman setup..."
 sudo pacman-key --init
-sudo pacman-key --populate archlinux
+#sudo pacman-key --populate archlinux
 #adding this key to fix issues with pgp signatures on steamdeck. Might be able to remove the previous link for --populate archlinux
 sudo pacman-key --populate holo
 
@@ -36,7 +36,7 @@ INSTALL="sudo pacman -S --disable-download-timeout --overwrite '*' --noconfirm"
 ${INSTALL} -yu
 
 # Install required packages
-${INSTALL} tmux
+#${INSTALL} tmux
 ${INSTALL} git
 ${INSTALL} mono
 ${INSTALL} mono-addins
@@ -46,9 +46,6 @@ ${INSTALL} cmake
 ${INSTALL} base-devel
 ${INSTALL} glibc
 ${INSTALL} linux-api-headers
-${INSTALL} qt5-tools
-${INSTALL} qt5-wayland
-${INSTALL} qt5-base
 ${INSTALL} python
 ${INSTALL} zlib
 ${INSTALL} ninja
@@ -56,29 +53,20 @@ ${INSTALL} python-pip
 ${INSTALL} docker
 
 # Dependencies for QGC
-${INSTALL} qt5-speech
-${INSTALL} qt5-multimedia
-${INSTALL} qt5-serialport
-${INSTALL} qt5-charts
-${INSTALL} qt5-quickcontrols
-${INSTALL} qt5-quickcontrols2
-${INSTALL} qt5-location
-${INSTALL} qt5-svg
-${INSTALL} qt5-graphicaleffects
-${INSTALL} qt5-x11extras
 ${INSTALL} patchelf
 ${INSTALL} xdg-desktop-portal-kde
 ${INSTALL} espeak-ng
 ${INSTALL} speech-dispatcher
 
-${INSTALL} lib32-pipewire-jack
-${INSTALL} lib32-gst-plugins-good
-${INSTALL} lib32-gst-plugins-base
-${INSTALL} lib32-gstreamer
-${INSTALL} lib32-gst-plugins-base-libs
-${INSTALL} qt-gstreamer
-${INSTALL} gstreamer-vaapi
-${INSTALL} gstreamermm
+#Gstreamer
+${INSTALL} gstreamer
+${INSTALL} gst-plugins-base
+${INSTALL} gst-plugins-good
+${INSTALL} gst-plugins-bad
+${INSTALL} gst-plugins-ugly
+${INSTALL} gst-libav
+
+
 
 #Setup yay
 mkdir ~/aur
@@ -113,15 +101,14 @@ EOF
 
 # TODO: Add sc-controller profile to ~/.config/scc/profiles/
 
+
 # Fetch QGC AppImage
 echo "Setting up QGC..."
 cd ~/Desktop/
 # Using master build version of QGC (13031c3) to fix video color issues. The commit here was tested and working well: (https://github.com/mavlink/qgroundcontrol/commit/13031c3f6ca5a58ef3d47cb3b9891c429f696387)
 # TODO: replace with stable version once fixes have been merged
-wget https://github.com/mavlink/qgroundcontrol/releases/download/latest/QGroundControl-x86_64.AppImage
-chmod +x QGroundControl-x86_64.AppImage
-
-
+wget https://github.com/mavlink/qgroundcontrol/releases/download/v4.4.2/QGroundControl.AppImage
+chmod +x QGroundControl.AppImage
 
 # Give 'deck' user permission to access serial I/O devices.
 sudo usermod -a -G uucp deck
@@ -138,12 +125,14 @@ do
     sudo mv "${VOICE_DIR}/${v}" "${VOICE_DUMP}"
 done
 
+
 read -p "Enable routing for Herelink network (y/n; default=y): " herelinkask
 if [[ ${#herelinkask} == 0 || ${herelinkask:0:1} == "Y" || ${herelinkask:0:1} == "y" ]]; then
 #Set Herleink IP routes
 #TODO: make this persistent. Right now it doesn't survive reboots. Right now a user can make it persistent easily by setting it up in the routes section of the ipv4 menu.
 sudo ip route add 192.168.144.0/24 via 192.168.43.1
 fi
+
 
 read -p "Preserve Steam gaming mode boot priority (y/n; default=y): " gamingask
 if [[ ${#gamingask} == 0 || ${gamingask:0:1} == "Y" || ${gamingask:0:1} == "y" ]]; then
