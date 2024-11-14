@@ -1,0 +1,83 @@
+{
+    "_": "", 
+    "buttons": {
+        "A": {
+            "action": "button(Keys.BTN_GAMEPAD)"
+        }, 
+        "B": {
+            "action": "button(Keys.BTN_EAST)"
+        }, 
+        "BACK": {
+            "action": "button(Keys.KEY_ESC)"
+        }, 
+        "C": {
+            "action": "button(Keys.KEY_LEFTMETA)"
+        }, 
+        "CPADPRESS": {
+            "action": "button(Keys.BTN_LEFT)"
+        }, 
+        "LB": {
+            "action": "button(Keys.BTN_TL)"
+        }, 
+        "LGRIP": {
+            "action": "button(Keys.KEY_LEFTCTRL)"
+        }, 
+        "LGRIP2": {
+            "action": "button(Keys.KEY_LEFTSHIFT)"
+        }, 
+        "RB": {
+            "action": "button(Keys.BTN_TR)"
+        }, 
+        "RGRIP": {
+            "action": "button(Keys.KEY_LEFTALT)"
+        }, 
+        "RGRIP2": {
+            "action": "button(Keys.KEY_TAB)"
+        }, 
+        "RSTICKPRESS": {
+            "action": "button(Keys.BTN_THUMBR)"
+        }, 
+        "START": {
+            "action": "button(Keys.KEY_ENTER)"
+        }, 
+        "STICKPRESS": {
+            "action": "button(Keys.BTN_THUMBL)"
+        }, 
+        "X": {
+            "action": "button(Keys.BTN_NORTH)"
+        }, 
+        "Y": {
+            "action": "button(Keys.BTN_WEST)"
+        }
+    }, 
+    "cpad": {
+        "action": "mouse()"
+    }, 
+    "dpad": {
+        "action": "dpad(button(Keys.KEY_UP), button(Keys.KEY_DOWN), button(Keys.KEY_LEFT), button(Keys.KEY_RIGHT))"
+    }, 
+    "gyro": {
+        "action": "cemuhook()"
+    }, 
+    "is_template": false, 
+    "menus": {}, 
+    "pad_left": {
+        "action": "feedback(LEFT, 4096, 16.0, ball(XY(mouse(Rels.REL_HWHEEL), mouse(Rels.REL_WHEEL))))"
+    }, 
+    "pad_right": {
+        "action": "feedback(RIGHT, 2936, 5.0, ball(5.012, mouse()))"
+    }, 
+    "rstick": {
+        "action": "sens(1.2, 1.2, XY(axis(Axes.ABS_RX), raxis(Axes.ABS_RY)))"
+    }, 
+    "stick": {
+        "action": "sens(1.2, 1.2, XY(axis(Axes.ABS_X), raxis(Axes.ABS_Y)))"
+    }, 
+    "trigger_left": {
+        "action": "button(Keys.BTN_RIGHT)"
+    }, 
+    "trigger_right": {
+        "action": "button(Keys.BTN_LEFT)"
+    }, 
+    "version": 1.4
+}
