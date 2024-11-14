@@ -53,37 +53,12 @@ ${INSTALL} python-pip
 ${INSTALL} docker
 
 # Dependencies for QGC
-:'
-${INSTALL} qt5-tools
-${INSTALL} qt5-wayland
-${INSTALL} qt5-base
-${INSTALL} qt5-speech
-${INSTALL} qt5-multimedia
-${INSTALL} qt5-serialport
-${INSTALL} qt5-charts
-${INSTALL} qt5-quickcontrols
-${INSTALL} qt5-quickcontrols2
-${INSTALL} qt5-location
-${INSTALL} qt5-svg
-${INSTALL} qt5-graphicaleffects
-${INSTALL} qt5-x11extras
-'
 ${INSTALL} patchelf
 ${INSTALL} xdg-desktop-portal-kde
 ${INSTALL} espeak-ng
 ${INSTALL} speech-dispatcher
 
 #Gstreamer
-:'
-${INSTALL} lib32-pipewire-jack
-${INSTALL} lib32-gst-plugins-good
-${INSTALL} lib32-gst-plugins-base
-${INSTALL} lib32-gstreamer
-${INSTALL} lib32-gst-plugins-base-libs
-${INSTALL} qt-gstreamer
-${INSTALL} gstreamer-vaapi
-${INSTALL} gstreamermm
-'
 ${INSTALL} gstreamer
 ${INSTALL} gst-plugins-base
 ${INSTALL} gst-plugins-good
