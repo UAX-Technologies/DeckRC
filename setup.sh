@@ -67,10 +67,7 @@ ${INSTALL} gst-plugins-ugly
 ${INSTALL} gst-libav
 
 
-
 #Setup yay
-mkdir ~/aur
-cd ~/aur
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin/
 #Check out this specific version that is compatible with SteamOS
@@ -78,6 +75,15 @@ git checkout 96f90180a3cf72673b1769c23e2c74edb0293a9f
 makepkg -si --noconfirm
 
 # Install sc-controller-git from AUR.
+:'
+mkdir ~/aur
+cd ~/aur
+git clone --depth 1 https://aur.archlinux.org/sc-controller-git.git
+cd sc-controller-git
+sudo -u deck makepkg -i
+'
+
+# Install sc-controller-git from other sources
 echo "Starting sc-controller setup"
 #yay -S sc-controller-git
 cd ~/Desktop/
