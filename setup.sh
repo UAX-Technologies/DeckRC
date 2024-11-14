@@ -67,7 +67,7 @@ ${INSTALL} gst-plugins-ugly
 ${INSTALL} gst-libav
 
 
-:'
+
 #Setup yay
 mkdir ~/aur
 cd ~/aur
@@ -100,7 +100,7 @@ tee >~/.config/scc/config.json <<EOF
 EOF
 
 # TODO: Add sc-controller profile to ~/.config/scc/profiles/
-'
+
 
 # Fetch QGC AppImage
 echo "Setting up QGC..."
@@ -109,8 +109,6 @@ cd ~/Desktop/
 # TODO: replace with stable version once fixes have been merged
 wget https://github.com/mavlink/qgroundcontrol/releases/download/v4.4.2/QGroundControl.AppImage
 chmod +x QGroundControl.AppImage
-
-
 
 # Give 'deck' user permission to access serial I/O devices.
 sudo usermod -a -G uucp deck
