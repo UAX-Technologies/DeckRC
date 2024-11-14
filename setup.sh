@@ -66,32 +66,25 @@ ${INSTALL} gst-plugins-bad
 ${INSTALL} gst-plugins-ugly
 ${INSTALL} gst-libav
 
-
+:'
 #Setup yay
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin/
 #Check out this specific version that is compatible with SteamOS
 git checkout 96f90180a3cf72673b1769c23e2c74edb0293a9f
 makepkg -si --noconfirm
-
-# Install sc-controller-git from AUR.
-:'
-mkdir ~/aur
-cd ~/aur
-git clone --depth 1 https://aur.archlinux.org/sc-controller-git.git
-cd sc-controller-git
-sudo -u deck makepkg -i
 '
 
-# Install sc-controller-git from other sources
+# Install sc-controller
 echo "Starting sc-controller setup"
-#yay -S sc-controller-git
 cd ~/Desktop/
+# Using Kozec branch with fixes for right trackpad
 wget https://github.com/kozec/sc-controller/releases/download/v0.4.10-pre/sc-controller-0.4.8+5b42308-x86_64.AppImage
 chmod +x sc-controller-0.4.8+5b42308-x86_64.AppImage
 
 # Auto-start sc-controller
-cp /usr/share/applications/sc-controller.desktop ~/.config/autostart/
+# TODO: fix autostart for sccontroller
+# cp /usr/share/applications/sc-controller.desktop ~/.config/autostart/
 
 # Setup configuration file for sc-controller
 mkdir ~/.config/scc
@@ -111,7 +104,6 @@ EOF
 # Fetch QGC AppImage
 echo "Setting up QGC..."
 cd ~/Desktop/
-# Using master build version of QGC (13031c3) to fix video color issues. The commit here was tested and working well: (https://github.com/mavlink/qgroundcontrol/commit/13031c3f6ca5a58ef3d47cb3b9891c429f696387)
 # TODO: replace with stable version once fixes have been merged
 wget https://github.com/mavlink/qgroundcontrol/releases/download/v4.4.2/QGroundControl.AppImage
 chmod +x QGroundControl.AppImage
