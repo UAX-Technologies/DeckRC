@@ -104,7 +104,7 @@ EOF
 # Fetch QGC AppImage
 echo "Setting up QGC..."
 cd ~/Desktop/
-# TODO: replace with stable version once fixes have been merged
+# TODO: Replace with stable version once fully tested for upcomming (5.x) releases
 wget https://github.com/mavlink/qgroundcontrol/releases/download/v4.4.2/QGroundControl.AppImage
 chmod +x QGroundControl.AppImage
 
@@ -124,10 +124,10 @@ do
 done
 
 
-read -p "Enable routing for Herelink network (y/n; default=y): " herelinkask
-if [[ ${#herelinkask} == 0 || ${herelinkask:0:1} == "Y" || ${herelinkask:0:1} == "y" ]]; then
+read -p "Enable routing for Herelink network? (y/n; default=n): " herelinkask
+if [[ ${#herelinkask} == 1 || ${herelinkask:0:1} == "Y" || ${herelinkask:0:1} == "y" ]]; then
 #Set Herleink IP routes
-#TODO: make this persistent. Right now it doesn't survive reboots. Right now a user can make it persistent easily by setting it up in the routes section of the ipv4 menu.
+#TODO: make this persistent. Right now it doesn't survive reboots. Right now a user can make it persistent easily by setting it up in the routes section of the ipv4 menu in the KDE connection manager.
 sudo ip route add 192.168.144.0/24 via 192.168.43.1
 fi
 
