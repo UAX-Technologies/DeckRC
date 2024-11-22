@@ -1,0 +1,12 @@
+[Unit]
+Description=Restart SC-Controller after sleep
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/killall sc-controller
+ExecStartPost=/path/to/sc-controller.appimage --daemon
+RemainAfterExit=true
+
+[Install]
+WantedBy=suspend.target
