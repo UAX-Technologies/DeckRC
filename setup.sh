@@ -12,6 +12,8 @@ else
     echo "User password is already set. Continuing setup process."
 fi
 
+#Install CoreKeyboard - This is so the user has a keyboard when Steam is not running
+flatpak install -y flathub org.cubocore.CoreKeyboard
 
 
 # Allow read/write access to root filesystem
