@@ -4,8 +4,7 @@ After=suspend.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/killall sc-controller
-ExecStartPost=/path/to/sc-controller.appimage --daemon
+ExecStart=/home/deck/Desktop/sc-controller.appimage daemon restart
 RemainAfterExit=true
 
 [Install]
