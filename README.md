@@ -25,35 +25,7 @@ R/C controller made from a Steam Deck
    - Instructions to setup joystick using Steam or using sc-controller
 
 ## Install Instructions
-- Open the Desktop Mode
-   - Press “steam” button on left side
-   - Got to power menu
-   - Select switch to desktop
-- Install firefox
-- Install core keyboard
-- Make a shortcut for corekeyboard on the task bar
-   - Open application menu
-   - Find core keyboard under utilities
-   - Use right trigger to click-and-hold
-   - Drag onto the taskbar to create a shortcut
-- Open firefox and got to this github DeckRC page
-- Download the setup.sh file
-- Open the file browser
-- Locate the file in the Downloads folder
-- Make executable
-   - Tap and hold on the screen
-   - Select properties
-   - Select the permissions tab
-   - Check the “is executable” box
-   - Close the menu
-- Run in console
-   - Tap and hold on the screen
-   - Select run in Konsole
-- Follow the script instructions
-- Set a root password
-   - If this is your first time running the script it will ask you to setup a root password
-- Enter your password (again) to start the commands
-- The Deck will reboot following the install
+**See [Wiki](https://github.com/UAX-Technologies/DeckRC/wiki) for Instructions**
 
 ## Compatibility
 
