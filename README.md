@@ -6,40 +6,37 @@ R/C controller made from a Steam Deck
 
 [Flight Demo with Early Prototype](https://youtu.be/_oFQyhxMKOQ)
 
-***Repo Under Construction***
+# Repo Under Construction
 
 
-***Project Goals***
+## Project Goals
 
 1. Open source software to enable anyone to control a vehicle with the Steam Deck (using WiFi, Bluetooth, a wire, or other self-developed means).
 2. Build instructinos for DIY radio options to allow anyone to build their own fully functional long-range digital drone (Ubiquiti gear, ESP chips, [Drone Bridge](https://github.com/DroneBridge/DroneBridge), RFD + 5.8 GHz vRX).
 3. Support for commercially developed versions for industrial drone customers using COTS radios ([Doodle Labs](https://uaxtech.com/products/deck-rc), Silvus, Persistent Systems, Microhard).
-4. A low cost version for consumers if the right radio can be found.
+4. An easy to build low cost version if the right radio can be found.
 
 
-***Version History***
+## Version History
 
-v1
-
--Simple script to install dependancies required to run QGC with full video
-
--Instrucitons to run QGC
-
--Instructions to setup joystick using Steam or using sc-controller
+**v1**
+   - Simple script to install dependancies required to run QGC with full video
+   - Instrucitons to run QGC
+   - Instructions to setup joystick using Steam or using sc-controller
 
 
-***Compatibility***
+## Compatibility
 
 Currently compatible with any aircraft that uses the Mavlink protocol and can be connected to wirelessly. Some aircraft like the SkyviperV2450 can be connected to directly using built-in wifi for video and controls. Other aircraft may need a radio module or adapter to communicate wirelessly. 
 
 
-***Radio Modules***
+## Radio Modules
 
 The Steam Deck can supply 7.5W from the USB port. With that power budget in mind, a prototype module using a Doodle Labs NanoOEM radio has been made and tested to over 1km (ran out of room at the field). More details and radio module development is planned.
 
 If you have a radio module you would like to see integrated, please submit an issue/feature request or send an email to the address below.
 
 
-***Commercial Options***
+## Commercial Options
 
 For commercial support or customized versions (hardware and software) please contact [UAX Technologies](https://uaxtech.com/)
