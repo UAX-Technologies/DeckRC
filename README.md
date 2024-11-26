@@ -24,6 +24,8 @@ R/C controller made from a Steam Deck
    - Instrucitons to run QGC
    - Instructions to setup joystick using Steam or using sc-controller
 
+## Install Instructions
+**See [Wiki](https://github.com/UAX-Technologies/DeckRC/wiki) for Instructions**
 
 ## Compatibility
 
