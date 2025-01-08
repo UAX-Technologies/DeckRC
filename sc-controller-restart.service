@@ -1,0 +1,11 @@
+[Unit]
+Description=Restart SC-Controller after sleep
+After=suspend.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/deck/Desktop/sc-controller.AppImage daemon restart
+RemainAfterExit=true
+
+[Install]
+WantedBy=suspend.target
