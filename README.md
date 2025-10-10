@@ -20,7 +20,7 @@ R/C controller made from a Steam Deck
 ## Version History
 
 **v1**
-   - Simple script to install dependancies required to run QGC with full video
+   - Simple script to install dependencies required to run QGC with full video
    - Instructions to run QGC
    - Instructions to setup joystick using Steam or using sc-controller
 
