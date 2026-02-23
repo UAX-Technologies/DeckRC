@@ -12,7 +12,7 @@ R/C controller made from a Steam Deck
 ## Project Goals
 
 1. Open source software to enable anyone to control a vehicle with the Steam Deck (using WiFi, Bluetooth, a wire, or other self-developed means).
-2. Build instructinos for DIY radio options to allow anyone to build their own fully functional long-range digital drone (Ubiquiti gear, ESP chips, [Drone Bridge](https://github.com/DroneBridge/DroneBridge), RFD + 5.8 GHz vRX).
+2. Build instructions for DIY radio options to allow anyone to build their own fully functional long-range digital drone (Ubiquiti gear, ESP chips, [Drone Bridge](https://github.com/DroneBridge/DroneBridge), RFD + 5.8 GHz vRX).
 3. Support for commercially developed versions for industrial drone customers using COTS radios ([Doodle Labs](https://uaxtech.com/products/deck-rc), Silvus, Persistent Systems, Microhard).
 4. An easy to build low cost version if the right radio can be found.
 
@@ -20,8 +20,8 @@ R/C controller made from a Steam Deck
 ## Version History
 
 **v1**
-   - Simple script to install dependancies required to run QGC with full video
-   - Instrucitons to run QGC
+   - Simple script to install dependencies required to run QGC with full video
+   - Instructions to run QGC
    - Instructions to setup joystick using Steam or using sc-controller
 
 ## Install Instructions
