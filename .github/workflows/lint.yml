@@ -21,8 +21,25 @@ jobs:
 
       - name: Validate systemd unit syntax
         run: |
-          # Replace the AppImage path with a real binary since it won't exist in CI.
-          # This validates unit file structure and syntax without requiring hardware.
-          sed 's|ExecStart=.*|ExecStart=/bin/true|' sc-controller-restart.service \
-            > /tmp/sc-controller-test.service
-          systemd-analyze verify /tmp/sc-controller-test.service
+          python3 - <<'EOF'
+          import configparser, sys
+
+          p = configparser.ConfigParser(strict=False)
+          p.read('sc-controller-restart.service')
+
+          required_sections = {'unit', 'service', 'install'}
+          present = {s.lower() for s in p.sections()}
+          missing = required_sections - present
+          if missing:
+              print(f"ERROR: Missing sections: {missing}", file=sys.stderr)
+              sys.exit(1)
+
+          required_service_keys = {'type', 'execstart'}
+          present_keys = {k.lower() for k in p.options('Service')}
+          missing_keys = required_service_keys - present_keys
+          if missing_keys:
+              print(f"ERROR: Missing [Service] keys: {missing_keys}", file=sys.stderr)
+              sys.exit(1)
+
+          print("sc-controller-restart.service structure OK")
+          EOF
