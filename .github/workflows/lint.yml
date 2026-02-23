@@ -1,0 +1,28 @@
+name: Lint
+
+on:
+  push:
+    branches: [master, main, "claude/**"]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ShellCheck — setup.sh
+        run: shellcheck setup.sh
+
+      - name: Validate SC-Controller profile (JSON)
+        run: python3 -m json.tool UAX-Hybrid-Profile.sccprofile > /dev/null
+
+      - name: Validate systemd unit syntax
+        run: |
+          # Replace the AppImage path with a real binary since it won't exist in CI.
+          # This validates unit file structure and syntax without requiring hardware.
+          sed 's|ExecStart=.*|ExecStart=/bin/true|' sc-controller-restart.service \
+            > /tmp/sc-controller-test.service
+          systemd-analyze verify /tmp/sc-controller-test.service
