@@ -23,9 +23,11 @@ DeckRC/
 ├── README.md                       # Project overview and goals
 ├── LICENSE                         # License file
 └── .github/
-    └── ISSUE_TEMPLATE/
-        ├── bug_report.md
-        └── feature_request.md
+    ├── ISSUE_TEMPLATE/
+    │   ├── bug_report.md
+    │   └── feature_request.md
+    └── workflows/
+        └── lint.yml                # CI: ShellCheck, JSON validation, systemd unit check
 ```
 
 ---
@@ -124,20 +126,40 @@ Profile version: `1.4`
 
 ### Making Changes
 
-Since this project has no build system or tests, the workflow is straightforward:
-
 1. Create a feature branch from `master`
 2. Edit the relevant file(s)
-3. Commit with a clear, descriptive message (see commit history for style reference)
-4. Open a PR against `master`
+3. Run the local validation commands listed in "CI / Automated Checks" below before committing
+4. Commit with a clear, descriptive message (see commit history for style reference)
+5. Open a PR against `master` — CI runs automatically on push
 
-### No Build/Test System
+### CI / Automated Checks
 
-There is no `Makefile`, no CI pipeline, and no automated tests. Changes to `setup.sh` should be manually validated on actual SteamOS hardware (or in a SteamOS environment). Linting bash scripts with `shellcheck` is recommended before committing.
+`.github/workflows/lint.yml` runs on every PR and push to `master`/`main`. The three checks are:
+
+| Check | Command | What it validates |
+|---|---|---|
+| ShellCheck | `shellcheck setup.sh` | Bash correctness in `setup.sh` |
+| JSON validation | `python3 -m json.tool UAX-Hybrid-Profile.sccprofile` | SC-Controller profile is valid JSON |
+| Systemd unit check | Python `configparser` script | `sc-controller-restart.service` has required sections/keys |
+
+**Run these locally before pushing** to avoid CI failures:
+
+```bash
+shellcheck setup.sh
+python3 -m json.tool UAX-Hybrid-Profile.sccprofile > /dev/null && echo OK
+bash -n setup.sh
+```
+
+**Why Python for the systemd check (not `systemd-analyze verify`):** The GitHub Actions ubuntu runner does not have an active D-Bus/systemd session, so `systemd-analyze` cannot connect and fails. The Python `configparser` approach validates unit file structure without needing a running systemd.
 
 ### File Editing Conventions
 
-- **`setup.sh`**: Bash script; keep interactive prompts consistent with the existing `y/n` pattern (default shown in parentheses). Commented-out code using `:'...'` heredoc syntax is used for sections under development (e.g., yay setup).
+- **`setup.sh`**: Bash script; keep interactive prompts consistent with the existing `y/n` pattern (default shown in parentheses). All changes must pass `shellcheck setup.sh` with zero findings. Key patterns to follow:
+  - Use `read -rp "... (y/n; default=X): " varname` (the `-r` flag is required by ShellCheck)
+  - Use `cd /some/path || exit` (never bare `cd` without error handling)
+  - Use bash arrays for commands stored in variables: `CMD=(sudo pacman -S --noconfirm)` and `"${CMD[@]}" pkg` — **not** a plain string variable, which breaks quoting
+  - Use `# comment` lines for disabled code — **not** the `:'...'` heredoc trick (ShellCheck SC2289 flags it as an error)
+  - Quote all variable expansions that may contain spaces or special characters
 - **`UAX-Hybrid-Profile.sccprofile`**: Valid JSON; maintain the `version: 1.4` field; test with SC-Controller before committing.
 - **Systemd service files**: Follow standard systemd unit syntax.
 
@@ -214,10 +236,17 @@ DeckRC is developed by [UAX Technologies](https://uaxtech.com/). Commercial hard
 
 When working on this repository, AI assistants should:
 
-1. **Validate bash syntax** before modifying `setup.sh` — use `bash -n setup.sh` to check for syntax errors
-2. **Preserve interactive prompt patterns** — new optional features should follow the same `read -p "... (y/n; default=X): "` pattern
-3. **Keep the JSON profile valid** — run `python3 -m json.tool UAX-Hybrid-Profile.sccprofile` to validate after edits
-4. **Not assume a build system exists** — there is no `make`, `npm`, `cargo`, or other build tool
-5. **Be aware of SteamOS constraints**: the root filesystem is read-only by default (`steamos-readonly disable` is required for pacman installs); packages installed via pacman may be wiped on SteamOS system updates
-6. **Reference the wiki** for user-facing installation instructions — the README links to `github.com/UAX-Technologies/DeckRC/wiki`
-7. **Update this file** if new scripts, services, profiles, or major dependencies are added
+1. **Run ShellCheck before committing** — `shellcheck setup.sh` must exit 0 with no findings. ShellCheck is enforced in CI. Common pitfalls:
+   - Store command arrays as bash arrays, not strings: `CMD=(sudo pacman -S --noconfirm)` / `"${CMD[@]}" pkg`
+   - Always use `read -rp` (not `read -p`) to avoid SC2162
+   - Always use `cd /path || exit` (not bare `cd`) to avoid SC2164
+   - Never use `:'...'` for multi-line comments (SC2289 error) — use `#` lines instead
+   - Quote all variable expansions: `"$USER"`, not `$USER`
+2. **Validate bash syntax** before modifying `setup.sh` — `bash -n setup.sh` catches parse errors
+3. **Preserve interactive prompt patterns** — new optional features should follow the same `read -rp "... (y/n; default=X): "` pattern
+4. **Keep the JSON profile valid** — run `python3 -m json.tool UAX-Hybrid-Profile.sccprofile` to validate after edits
+5. **Do not use `systemd-analyze verify` in CI** — it requires a live D-Bus session unavailable on GitHub Actions runners; use Python `configparser` to validate unit file structure instead
+6. **Not assume a build system exists** — there is no `make`, `npm`, `cargo`, or other build tool; the only automated checks are the three in `lint.yml`
+7. **Be aware of SteamOS constraints**: the root filesystem is read-only by default (`steamos-readonly disable` is required for pacman installs); packages installed via pacman may be wiped on SteamOS system updates
+8. **Reference the wiki** for user-facing installation instructions — the README links to `github.com/UAX-Technologies/DeckRC/wiki`
+9. **Update this file** if new scripts, services, profiles, CI checks, or major dependencies are added

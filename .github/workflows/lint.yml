@@ -1,0 +1,45 @@
+name: Lint
+
+on:
+  push:
+    branches: [master, main, "claude/**"]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: ShellCheck — setup.sh
+        run: shellcheck setup.sh
+
+      - name: Validate SC-Controller profile (JSON)
+        run: python3 -m json.tool UAX-Hybrid-Profile.sccprofile > /dev/null
+
+      - name: Validate systemd unit syntax
+        run: |
+          python3 - <<'EOF'
+          import configparser, sys
+
+          p = configparser.ConfigParser(strict=False)
+          p.read('sc-controller-restart.service')
+
+          required_sections = {'unit', 'service', 'install'}
+          present = {s.lower() for s in p.sections()}
+          missing = required_sections - present
+          if missing:
+              print(f"ERROR: Missing sections: {missing}", file=sys.stderr)
+              sys.exit(1)
+
+          required_service_keys = {'type', 'execstart'}
+          present_keys = {k.lower() for k in p.options('Service')}
+          missing_keys = required_service_keys - present_keys
+          if missing_keys:
+              print(f"ERROR: Missing [Service] keys: {missing_keys}", file=sys.stderr)
+              sys.exit(1)
+
+          print("sc-controller-restart.service structure OK")
+          EOF
