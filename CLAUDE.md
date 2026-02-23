@@ -152,6 +152,46 @@ There is no `Makefile`, no CI pipeline, and no automated tests. Changes to `setu
 
 ---
 
+## GitHub Issues Tracker
+
+### Open Issues
+
+| # | Title | Labels | Summary |
+|---|-------|--------|---------|
+| #28 | Speech Not Working in QGC Daily Build | — | Text-to-speech fails in QGC daily builds with a `speechd` plugin error despite `espeak-ng` and `speech-dispatcher` being installed; suspected Qt/Linux version incompatibility. |
+| #27 | Tutorial Video | — | Request for a video tutorial covering the full setup process; open question whether hardware and software setup should be separate videos. |
+| #26 | Add Automated (CI) Testing | — | Proposal to run `setup.sh` inside a Docker container via GitHub Actions; references `linuxserver/docker-steamos` as a candidate base image. |
+| #22 | Stop Steam from Running on R/C Only Installs | — | Goal to remove Steam from DeckRC-only installs; a prior attempt to disable the Steam binary caused boot failures and was reverted. |
+| #20 | Move as Many Functions as Possible into User Space | enhancement | Many script commands require root; proposal to shift to unprivileged operation via AppImage bundling, Nix, or rwfus overlay to avoid needing `steamos-readonly disable`. |
+| #16 | Detect if QGC and/or SCC Are Already Installed Before Downloading | enhancement | `setup.sh` re-downloads both AppImages on every run, causing file accumulation on `~/Desktop/`; fix should detect existing installs and skip or replace them. |
+| #15 | Joystick Controls Do Not Work When Resuming from Sleep | bug | After suspend/resume, SC-Controller inputs stop working in QGC due to USB errors; workaround is restarting the SC-Controller daemon (which `sc-controller-restart.service` implements). |
+| #11 | Any Updates and Tutorials | documentation | Community request for full end-to-end build documentation (Steam Deck setup → radio integration → drone construction); basic wiki instructions started, four-part roadmap planned. |
+| #4 | Radio Reboots When Plugged In | bug | Doodle Labs NanoOEM radio unexpectedly restarts when powered via USB hub; possibly power-supply dependent (observed with Anker 65W adapter). |
+| #2 | Arming Scheme Issue | bug | Prearm error prevents RC1/RC2 channels from reaching neutral when RS click + R1 are used together during the arming sequence. |
+
+### Closed Issues (with Resolution)
+
+| # | Title | Resolution |
+|---|-------|------------|
+| #14 | Controls Not Functioning with SC Controller | **Fixed** — Switched to kozec fork AppImage (`v0.4.10-pre`), which resolved right trackpad behaving as a joystick mouse. |
+| #10 | Video Not Working on Latest Version of QGC | **Fixed** — Added `gst-libav` to install list; removed `gstreamer-vaapi` which conflicted. |
+| #9 | Getting Keyring Errors on Install | **Fixed** — Replaced `archlinux` keyring with `holo` keyring (`pacman-key --populate holo`), now in `setup.sh`. |
+| #6 | Radio Failsafes If Screen Goes to Sleep | **Not Planned** — Marked intentional: controls and external radio power should be off when the unit sleeps. |
+| #5 | Steam Deck Audio Set to Wrong Device | **Not Reproducible** — Could not reproduce across multiple factory resets on two different Steam Decks. |
+| #3 | Mavproxy Battery Alerts | **Fixed** — Removed Mavproxy from the standard install; QGC's built-in voice prompts are sufficient. |
+| #1 | System Crash (AMD GPU Page Fault) | **Not Planned** — Crash occurred twice in 2022 but did not recur for over a year; closed as one-off. |
+
+### Key Patterns from Issue History
+
+- **SC-Controller issues** have frequently been caused by the upstream AppImage; always use the **kozec fork** (`v0.4.10-pre`), not the original.
+- **GStreamer** is a recurring pain point. The working set is: `gstreamer`, `gst-plugins-{base,good,bad,ugly}`, `gst-libav`. Do **not** add `gstreamer-vaapi` — it breaks video.
+- **Pacman keyring** on SteamOS requires `--populate holo`, not `--populate archlinux`.
+- **Sleep/resume** breaks SC-Controller USB recognition — this is the entire reason `sc-controller-restart.service` exists.
+- **Root filesystem access** (`steamos-readonly disable`) is a known SteamOS constraint; there is active interest (issue #20) in reducing reliance on it.
+- **QGC + Wayland** is a known incompatibility (issue #22 adjacent); Plasma/X11 session is the current workaround.
+
+---
+
 ## External Dependencies
 
 | Dependency | Source | Purpose |
